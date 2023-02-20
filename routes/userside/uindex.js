@@ -184,7 +184,7 @@ router.get('/', (req, res, next) => {
             req.flash('error', err);
             res.render('userside/index');
         } else {
-                res.render('userside/index');
+                res.json({rows});
         }
     })
 })
@@ -203,7 +203,7 @@ router.get('/showall', (req, res, next) => {
 router.get('/tnmdetail/(:tnmID)', (req, res, next) => {
     let tnmID = req.params.tnmID;
     dbConnection.query('SELECT * FROM tournament LEFT JOIN sport ON tournament.sportID = sport.sportID WHERE tnmID = ' + tnmID, (err, rows) => {
-            res.render('userside/tnm/tnmdetail');
+            res.json({rows});
     })
 })
 
