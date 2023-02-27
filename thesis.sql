@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2023 at 07:22 AM
+-- Generation Time: Feb 26, 2023 at 05:02 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -43,7 +43,6 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`accountID`, `email`, `password`, `name`, `lname`, `phone`, `level`, `status`) VALUES
-(0, 'genxiuyin29@gmail.com', '1234567890', 'nun', 'rat', '0831140590', 'ผู้ดูแลระบบ', 'ใช้งาน'),
 (1, 'admin', 'admin', 'admin', 'admin', '0984926565', 'ผู้ดูแลระบบ', 'ใช้งาน'),
 (2, 'staff', 'staff', 'staff', 'staff', 'staff', 'เจ้าหน้าที่', 'ใช้งาน'),
 (9, 'firstlnw0099@gmail.com', 'f1478fd087', 'นนทพัทธ์', 'ฤกษ์ฤทธิชัย', '0984926565', 'ผู้ดูแลระบบ', 'ปิดการใช้งาน');
@@ -65,8 +64,82 @@ CREATE TABLE `faculty` (
 --
 
 INSERT INTO `faculty` (`facultyID`, `name`, `uniID`) VALUES
-(1, 'คณะวิศวกรรมศาสตร์', 1),
-(2, 'คณะศิลปศาสตร์', 1);
+(1, 'วิศวกรรมศาสตร์', 1),
+(2, 'ศิลปกรรมศาสตร์', 1),
+(3, 'บริหารธุรกิจ', 1),
+(4, 'เทคโนโลยีคหกรรมศาสตร์', 1),
+(5, 'เทคโนโลยีการเกษตร', 1),
+(6, 'ครุศาสตร์อุตสาหกรรม', 1),
+(7, 'วิทยาศาสตร์และเทคโนโลยี', 1),
+(8, 'เทคโนโลยีสื่อสารมวลชน', 1),
+(9, 'ศิลปศาสตร์', 1),
+(10, 'สถาปัตยกรรมศาสตร์', 1),
+(11, 'การแพทย์บูรณาการ', 1),
+(12, 'พยาบาลศาสตร์', 1),
+(13, 'บริหารธุรกิจและศิลปศาสตร์', 2),
+(14, 'วิทยาศาสตร์และเทคโนโลยีการเกษตร', 2),
+(15, 'วิศวกรรมศาสตร์', 2),
+(16, 'ศิลปกรรมและสถาปัตยกรรมศาสตร์', 2),
+(17, 'บริหารธุรกิจ', 3),
+(18, 'วิทยาศาสตร์และศิลปศาสตร์', 3),
+(19, 'วิศวกรรมศาสตร์และเทคโนโลยี', 3),
+(20, 'สถาปัตยกรรมศาสตร์และศิลปกรรมสร้างสรรค์', 3),
+(21, 'ครุศาสตร์อุตสาหกรรม', 3),
+(22, 'วิศวกรรมศาสตร์', 3),
+(23, 'บริหารธุรกิจและเทคโนโลยีสารสรเทศ', 3),
+(24, 'อุตสาหกรรมและเทคโนโลยี', 3),
+(25, 'ทรัพยากรธรรมชาติ', 3),
+(26, 'เกษตรศาสตร์และเทคโนโลยี', 3),
+(27, 'เทคโนโลยีการจัดการ', 3),
+(28, 'วิศวกรรมศาสตร์', 4),
+(29, 'ครุศาสตร์อุตสาหกรรม', 4),
+(30, 'เทคโนโลยีคหกรรมศาสตร์', 4),
+(31, 'ศิลปศาสตร์', 4),
+(32, 'อุตสาหกรรมสิ่งทอ', 4),
+(33, 'บริหารธุรกิจ', 4),
+(34, 'วิทยาศาสตร์และเทคโนโลยี', 4),
+(35, 'เกษตรศาสตร์และทรัพยากรธรรมชาติ', 5),
+(36, 'วิทยาศาสตร์และเทคโนโลยี', 5),
+(37, 'มนุษยศาสตร์และสังคมศาสตร์', 5),
+(38, 'บริหารธุรกิจและเทคโนโลยีสารสนเทศ', 5),
+(39, 'ศิลปศาสตร์', 5),
+(40, 'เทคโนโลยีอุตสาหกรรมเกษตร', 5),
+(41, 'เทคโนโลยีสังคม', 5),
+(42, 'วิศวกรรมศาสตร์และสถาปัตยกรรมศาสตร์', 5),
+(43, 'สัตวแพทยศาสตร์', 5),
+(44, 'ครุศาสตร์อุตสาหกรรม', 6),
+(45, 'เทคโนโลยีคหกรรมศาสตร์', 6),
+(46, 'เทคโนโลยีสื่อสารมวลชน', 6),
+(47, 'บริหารธุรกิจ', 6),
+(48, 'วิทยาศาสตร์และเทคโนโลยี', 6),
+(49, 'วิศวกรรมศาสตร์', 6),
+(50, 'ศิลปศาสตร์', 6),
+(51, 'อุตสาหกรรมสิ่งทอและออกแบบแฟชั่น', 6),
+(52, 'สถาปัตยกรรมศาสตร์และการออกแบบ', 6),
+(53, 'วิศวกรรมศาสตร์', 7),
+(54, 'สถาปัตยกรรมศาสตร์และการออกแบบ', 7),
+(55, 'บริหารธุรกิจ', 7),
+(56, 'ศิลปศาสตร์', 7),
+(57, 'อุตสาหกรรมการท่องเที่ยวและโรงแรม', 7),
+(58, 'อุตสาหกรรมและเทคโนโลยี', 7),
+(59, 'วิศวกรรมศาสตร์', 8),
+(60, 'ศิลปศาสตร์', 8),
+(61, 'บริหารธุรกิจ', 8),
+(62, 'สถาปัตยกรรมศาสตร์', 8),
+(63, 'ครุศาสตร์อุตสาหกรรมและเทคโนโลยี', 8),
+(64, 'เกษตรศาสตร์', 8),
+(65, 'สัตวแพทยศาสตร์', 8),
+(66, 'วิทยาศาสตร์และเทคโนโลยี', 8),
+(67, 'เทคโนโลยีการจัดการ', 8),
+(68, 'อุตสาหกรรมเกษตร', 8),
+(69, 'วิทยาศาสตร์และเทคโนโลยีการประมง', 8),
+(70, 'วิศวกรรมศาสตร์และเทคโนโลยี', 8),
+(71, 'ครุศาสตร์อุตสาหกรรม', 9),
+(72, 'เทคโนโลยีการเกษตรและอุตสาหกรรมเกษตร', 9),
+(73, 'บริหารธุรกิจและเทคโนโลยีสารสนเทศ', 9),
+(74, 'วิทยาศาสตร์และเทคโนโลยี', 9),
+(75, 'วิศวกรรมศาสตร์และสถาปัตยกรรมศาสตร์', 9),
+(76, 'ศิลปศาสตร์', 9);
 
 -- --------------------------------------------------------
 
@@ -106,6 +179,42 @@ CREATE TABLE `matchplay` (
   `timeend` time DEFAULT NULL,
   `placeID` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `matchplay`
+--
+
+INSERT INTO `matchplay` (`matchID`, `participant1`, `participant2`, `playerID`, `teamID`, `score1`, `score2`, `score`, `tnmID`, `round`, `seed`, `pDate`, `time`, `timeend`, `placeID`) VALUES
+(311, 159, 160, NULL, NULL, 4, 3, NULL, 28, '1', 1, '2023-02-26', '21:38:00', '21:38:00', 33),
+(312, 161, 162, NULL, NULL, 3, 1, NULL, 28, '2', 2, '2023-02-25', '21:39:00', '21:39:00', 34),
+(313, 180, 159, NULL, NULL, 1, 3, NULL, 28, '2', 3, '2023-02-26', '21:39:00', '21:39:00', 35),
+(314, 161, 159, NULL, NULL, 6, 1, NULL, 28, '3', 4, '2023-02-14', '21:41:00', '21:41:00', 36),
+(315, 161, NULL, NULL, NULL, NULL, NULL, NULL, 28, '4', 5, NULL, NULL, NULL, NULL),
+(335, 167, 168, NULL, NULL, 3, 1, NULL, 33, '1', 1, '2023-02-24', '22:19:00', '22:19:00', 33),
+(336, 169, 170, NULL, NULL, 3, 1, NULL, 33, '2', 2, '2023-02-26', '22:21:00', '22:21:00', 34),
+(337, 171, 172, NULL, NULL, 3, 1, NULL, 33, '2', 3, '2023-02-26', '22:21:00', '22:21:00', 35),
+(338, 173, 174, NULL, NULL, 3, 1, NULL, 33, '2', 4, '2023-02-24', '22:21:00', '22:21:00', 33),
+(339, 181, 167, NULL, NULL, 3, 1, NULL, 33, '2', 5, '2023-02-21', '22:25:00', '22:25:00', 33),
+(340, 169, 171, NULL, NULL, 3, 1, NULL, 33, '3', 6, '2023-02-01', '22:25:00', '22:25:00', 35),
+(341, 173, 181, NULL, NULL, 3, 1, NULL, 33, '3', 7, '2023-02-01', '22:25:00', '22:25:00', 36),
+(342, 169, 173, NULL, NULL, 3, 1, NULL, 33, '4', 8, '2023-02-26', '22:26:00', '22:26:00', 34),
+(343, 169, NULL, NULL, NULL, NULL, NULL, NULL, 33, '5', 9, NULL, NULL, NULL, NULL),
+(344, 182, 183, NULL, NULL, 3, 1, NULL, 38, '1', 1, '2023-02-26', '10:36:00', '10:36:00', 33),
+(345, 184, 185, NULL, NULL, 3, 1, NULL, 38, '1', 2, '2023-02-26', '10:37:00', '10:37:00', 34),
+(346, 186, 182, NULL, NULL, 3, 1, NULL, 38, '2', 3, '2023-02-26', '10:37:00', '10:37:00', 35),
+(347, 187, 184, NULL, NULL, 3, 1, NULL, 38, '2', 4, '2023-02-26', '10:37:00', '10:37:00', 36),
+(348, 186, 187, NULL, NULL, 3, 1, NULL, 38, '3', 5, '2023-02-25', '22:38:00', '22:38:00', 33),
+(349, 186, NULL, NULL, NULL, NULL, NULL, NULL, 38, '4', 6, NULL, NULL, NULL, NULL),
+(354, 188, 189, NULL, NULL, 3, 1, NULL, 39, '1', 1, '2023-01-29', '10:45:00', '10:45:00', 33),
+(355, 190, 191, NULL, NULL, 3, 1, NULL, 39, '1', 2, '2023-01-29', '10:46:00', '10:46:00', 34),
+(356, 192, 193, NULL, NULL, 3, 1, NULL, 39, '1', 3, '2023-01-29', '10:46:00', '10:46:00', 35),
+(357, 194, 188, NULL, NULL, 3, 1, NULL, 39, '2', 4, '2023-01-29', '10:46:00', '10:46:00', 36),
+(358, 190, 192, NULL, NULL, 3, 1, NULL, 39, '2', 5, '2023-01-30', '10:46:00', '10:46:00', 33),
+(359, 194, 190, NULL, NULL, 3, 1, NULL, 39, '3', 6, '2023-01-30', '10:46:00', '10:46:00', 34),
+(360, 194, NULL, NULL, NULL, NULL, NULL, NULL, 39, '4', 7, NULL, NULL, NULL, NULL),
+(361, 195, 196, NULL, NULL, 3, 1, NULL, 40, '1', 1, '2023-02-04', '22:50:00', '22:50:00', 33),
+(362, 197, 195, NULL, NULL, 3, 1, NULL, 40, '2', 2, '2023-02-25', '22:51:00', '22:51:00', 33),
+(365, 197, NULL, NULL, NULL, NULL, NULL, NULL, 40, '3', 3, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -248,7 +357,6 @@ INSERT INTO `place_opening` (`openingID`, `placeID`, `day`, `timeOpen`, `timeClo
 CREATE TABLE `player` (
   `playerID` int(3) NOT NULL,
   `playerIDCard` varchar(13) NOT NULL,
-  `playerStudentID` varchar(13) NOT NULL,
   `playerFName` varchar(50) NOT NULL,
   `playerLName` varchar(50) NOT NULL,
   `playerGender` enum('ชาย','หญิง') NOT NULL,
@@ -258,8 +366,6 @@ CREATE TABLE `player` (
   `facultyID` int(3) NOT NULL,
   `teamID` int(3) DEFAULT NULL,
   `playerFile1` varchar(255) DEFAULT NULL,
-  `playerFile2` varchar(255) DEFAULT NULL,
-  `playerFile3` varchar(255) DEFAULT NULL,
   `tnmID` int(3) NOT NULL,
   `detailDoc` varchar(255) DEFAULT NULL,
   `otp` int(10) DEFAULT NULL,
@@ -271,12 +377,47 @@ CREATE TABLE `player` (
 -- Dumping data for table `player`
 --
 
-INSERT INTO `player` (`playerID`, `playerIDCard`, `playerStudentID`, `playerFName`, `playerLName`, `playerGender`, `playerBirthday`, `playerPhone`, `playerEmail`, `facultyID`, `teamID`, `playerFile1`, `playerFile2`, `playerFile3`, `tnmID`, `detailDoc`, `otp`, `playerStatus`, `playerRegDate`) VALUES
-(127, '1650165106161', '6804864086486', 'นนทพัทธ์', 'ฤกษ์ฤทธิชัย', 'ชาย', '2023-02-09', '0984984094', 'firstlnw0099@gmail.com', 1, NULL, '1675917540170_kl.jpg', NULL, NULL, 20, NULL, NULL, 'accept', '2023-02-09'),
-(128, '1606516041861', '6840646464064', 'เมธานันท์', 'นิลพันธ์', 'ชาย', '2023-01-31', '0613921298', 'firstlnw0099@gmail.com', 1, NULL, '1675917585503_kl.jpg', NULL, NULL, 20, NULL, NULL, 'accept', '2023-02-09'),
-(129, '1098409189194', '6807437043464', 'กิตติภพ', 'รักสนิท', 'ชาย', '2023-02-21', '2013132103', 'firstlnw0099@gmail.com', 2, NULL, '1675917618880_kl.jpg', NULL, NULL, 20, NULL, NULL, 'accept', '2023-02-09'),
-(130, '1610964816408', '6087370373740', 'ชลธี', 'คำลือ', 'ชาย', '2023-02-01', '0984984094', 'firstlnw0099@gmail.com', 2, NULL, '1675917662596_kl.jpg', NULL, NULL, 20, NULL, NULL, 'accept', '2023-02-09'),
-(131, '1096846464064', '6384348304341', 'วสวิญญ์', 'รัตน์โชติ', 'ชาย', '2023-02-10', '0624283195', 'firstlnw0099@gmail.com', 2, NULL, '1675917704419_66kebb6ah7k8ejiakacgi.jpg', NULL, NULL, 20, NULL, NULL, 'accept', '2023-02-09');
+INSERT INTO `player` (`playerID`, `playerIDCard`, `playerFName`, `playerLName`, `playerGender`, `playerBirthday`, `playerPhone`, `playerEmail`, `facultyID`, `teamID`, `playerFile1`, `tnmID`, `detailDoc`, `otp`, `playerStatus`, `playerRegDate`) VALUES
+(159, '1980494894940', 'Nontaphat', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 28, NULL, NULL, 'accept', '2023-02-20'),
+(160, '0498498065406', 'กิตติภพ', 'Ruaklittichai', 'ชาย', '2023-02-22', '0984926565', 'firstlnw0099@gmail.com', 13, NULL, '1676968871938_à¸ªà¸à¸²à¸¡.png,1676968871939_b3me2cq1z1b71.png,1676968871939_4584093.png', 28, NULL, NULL, 'accept', '2023-02-21'),
+(161, '6504648674949', 'ชลธี', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 18, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 28, NULL, NULL, 'accept', '2023-02-21'),
+(162, '6504648674949', 'วสวิญญ์', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 28, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 28, NULL, NULL, 'accept', '2023-02-21'),
+(167, '1980494894940', 'Nontaphat', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 33, NULL, NULL, 'accept', '2023-02-20'),
+(168, '0498498065406', 'กิตติภพ', 'Ruaklittichai', 'ชาย', '2023-02-22', '0984926565', 'firstlnw0099@gmail.com', 13, NULL, '1676968871938_à¸ªà¸à¸²à¸¡.png,1676968871939_b3me2cq1z1b71.png,1676968871939_4584093.png', 33, NULL, NULL, 'accept', '2023-02-21'),
+(169, '6504648674949', 'ชลธี', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 18, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 33, NULL, NULL, 'accept', '2023-02-21'),
+(170, '6504648674949', 'วสวิญญ์', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 28, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 33, NULL, NULL, 'accept', '2023-02-21'),
+(171, '1980494894940', 'จักริน', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 33, NULL, NULL, 'accept', '2023-02-20'),
+(172, '0498498065406', 'เมธานันท์', 'Ruaklittichai', 'ชาย', '2023-02-22', '0984926565', 'firstlnw0099@gmail.com', 13, NULL, '1676968871938_à¸ªà¸à¸²à¸¡.png,1676968871939_b3me2cq1z1b71.png,1676968871939_4584093.png', 33, NULL, NULL, 'accept', '2023-02-21'),
+(173, '6504648674949', 'นพดล', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 18, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 33, NULL, NULL, 'accept', '2023-02-21'),
+(174, '6504648674949', 'ปฏิพล', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 28, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 33, NULL, NULL, 'accept', '2023-02-21'),
+(180, '1980494894940', 'จักริน', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 28, NULL, NULL, 'accept', '2023-02-20'),
+(181, '1980494894940', 'ธีรนัย', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 33, NULL, NULL, 'accept', '2023-02-20'),
+(182, '1980494894940', 'Nontaphat', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 38, NULL, NULL, 'accept', '2023-02-20'),
+(183, '0498498065406', 'กิตติภพ', 'Ruaklittichai', 'ชาย', '2023-02-22', '0984926565', 'firstlnw0099@gmail.com', 13, NULL, '1676968871938_à¸ªà¸à¸²à¸¡.png,1676968871939_b3me2cq1z1b71.png,1676968871939_4584093.png', 38, NULL, NULL, 'accept', '2023-02-21'),
+(184, '6504648674949', 'ชลธี', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 18, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 38, NULL, NULL, 'accept', '2023-02-21'),
+(185, '6504648674949', 'วสวิญญ์', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 28, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 38, NULL, NULL, 'accept', '2023-02-21'),
+(186, '1980494894940', 'จักริน', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 38, NULL, NULL, 'accept', '2023-02-20'),
+(187, '1980494894940', 'นพดล', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 38, NULL, NULL, 'accept', '2023-02-20'),
+(188, '1980494894940', 'Nontaphat', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 39, NULL, NULL, 'accept', '2023-02-20'),
+(189, '0498498065406', 'กิตติภพ', 'Ruaklittichai', 'ชาย', '2023-02-22', '0984926565', 'firstlnw0099@gmail.com', 13, NULL, '1676968871938_à¸ªà¸à¸²à¸¡.png,1676968871939_b3me2cq1z1b71.png,1676968871939_4584093.png', 39, NULL, NULL, 'accept', '2023-02-21'),
+(190, '6504648674949', 'ชลธี', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 18, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 39, NULL, NULL, 'accept', '2023-02-21'),
+(191, '6504648674949', 'วสวิญญ์', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 28, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 39, NULL, NULL, 'accept', '2023-02-21'),
+(192, '1980494894940', 'จักริน', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 39, NULL, NULL, 'accept', '2023-02-20'),
+(193, '1980494894940', 'นพดล', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 39, NULL, NULL, 'accept', '2023-02-20'),
+(194, '1980494894940', 'เมธานันท์', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 39, NULL, NULL, 'accept', '2023-02-20'),
+(195, '1980494894940', 'Nontaphat', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 40, NULL, NULL, 'accept', '2023-02-20'),
+(196, '0498498065406', 'กิตติภพ', 'Ruaklittichai', 'ชาย', '2023-02-22', '0984926565', 'firstlnw0099@gmail.com', 13, NULL, '1676968871938_à¸ªà¸à¸²à¸¡.png,1676968871939_b3me2cq1z1b71.png,1676968871939_4584093.png', 40, NULL, NULL, 'accept', '2023-02-21'),
+(197, '6504648674949', 'ชลธี', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 18, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 40, NULL, NULL, 'accept', '2023-02-21'),
+(198, '1980494894940', 'Nontaphat', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 41, NULL, NULL, 'accept', '2023-02-20'),
+(199, '0498498065406', 'กิตติภพ', 'Ruaklittichai', 'ชาย', '2023-02-22', '0984926565', 'firstlnw0099@gmail.com', 13, NULL, '1676968871938_à¸ªà¸à¸²à¸¡.png,1676968871939_b3me2cq1z1b71.png,1676968871939_4584093.png', 41, NULL, NULL, 'accept', '2023-02-21'),
+(200, '6504648674949', 'ชลธี', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 18, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 41, NULL, NULL, 'accept', '2023-02-21'),
+(201, '6504648674949', 'วสวิญญ์', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 28, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 41, NULL, NULL, 'accept', '2023-02-21'),
+(202, '1980494894940', 'จักริน', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 41, NULL, NULL, 'accept', '2023-02-20'),
+(203, '0498498065406', 'เมธานันท์', 'Ruaklittichai', 'ชาย', '2023-02-22', '0984926565', 'firstlnw0099@gmail.com', 13, NULL, '1676968871938_à¸ªà¸à¸²à¸¡.png,1676968871939_b3me2cq1z1b71.png,1676968871939_4584093.png', 41, NULL, NULL, 'accept', '2023-02-21'),
+(204, '6504648674949', 'นพดล', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 18, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 41, NULL, NULL, 'accept', '2023-02-21'),
+(205, '6504648674949', 'ปฏิพล', 'คำลือ', 'ชาย', '2023-02-21', '0984984162', 'firstlnw0099@gmail.com', 28, NULL, '1676969165180_b3me2cq1z1b71.png,1676969165180_4584093.png', 41, NULL, NULL, 'accept', '2023-02-21'),
+(206, '1980494894940', 'ธีรนัย', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 41, NULL, NULL, 'accept', '2023-02-20'),
+(207, '1980494894940', 'ํธีรพล', 'Ruaklittichai', 'ชาย', '2023-02-20', '0984926565', 'firstlnw0099@gmail.com', 1, NULL, '1676900567538_66kebb6ah7k8ejiakacgi.jpg', 41, NULL, NULL, 'accept', '2023-02-20');
 
 -- --------------------------------------------------------
 
@@ -336,6 +477,7 @@ CREATE TABLE `team` (
   `LnameAgent` varchar(50) NOT NULL,
   `teamPhoneA` varchar(10) DEFAULT NULL,
   `teamEmailA` varchar(50) DEFAULT NULL,
+  `uniID` int(10) DEFAULT NULL,
   `teamStatus` enum('deny','accept','wait','edit') DEFAULT 'wait',
   `teamPic` varchar(255) DEFAULT NULL,
   `tnmID` int(3) NOT NULL,
@@ -376,7 +518,11 @@ CREATE TABLE `tournament` (
 --
 
 INSERT INTO `tournament` (`tnmID`, `tnmName`, `sportID`, `tnmUrl`, `Rstartdate`, `Renddate`, `tnmStartdate`, `tnmEnddate`, `tnmTypegame`, `tnmDetail`, `tnmPicture`, `tnmFile1`, `tnmFile2`, `tnmFile3`, `accountID`, `st1`, `nd2`, `rd3`) VALUES
-(20, 'single elimination solo', 1, 'บัตรประชาชน และ บัตรประจำตัวนักศึกษา', '2023-02-08', '2023-02-08', '2023-02-08', '2023-02-08', NULL, 'single elimination solo', '1675866460866_basketball.jpg', '1675866460866_kl.jpg', NULL, NULL, NULL, NULL, NULL, NULL);
+(28, 'single 5 คน', 1, 'บัตรประชาชน และ บัตรประจำตัวนักศึกษา', '2023-02-22', '2023-02-25', '2023-02-20', '2023-02-20', 'single', 'solosingle', '1676900517256_000_33346NG-728x485.jpg', '1676900517256_kl.jpg', NULL, NULL, NULL, NULL, NULL, NULL),
+(33, 'single 9 คน', 1, 'บัตรประชาชน และ บัตรประจำตัวนักศึกษา', '2023-02-22', '2023-02-22', '2023-02-22', '2023-02-22', 'single', 'single 8 คน', '1677084861649_4.jpg', '1677084861649_2.jpg', NULL, NULL, NULL, NULL, NULL, NULL),
+(38, 'single 6 คน', 1, 'บัตรประชาชน และ บัตรประจำตัวนักศึกษา', '2023-02-22', '2023-02-25', '2023-02-20', '2023-02-20', 'single', 'solosingle', '1676900517256_000_33346NG-728x485.jpg', '1676900517256_kl.jpg', NULL, NULL, NULL, NULL, NULL, NULL),
+(39, 'single 7 คน', 1, 'บัตรประชาชน และ บัตรประจำตัวนักศึกษา', '2023-02-22', '2023-02-25', '2023-02-20', '2023-02-20', 'single', 'solosingle', '1676900517256_000_33346NG-728x485.jpg', '1676900517256_kl.jpg', NULL, NULL, NULL, NULL, NULL, NULL),
+(40, 'single 3 คน', 1, 'บัตรประชาชน และ บัตรประจำตัวนักศึกษา', '2023-02-22', '2023-02-25', '2023-02-20', '2023-02-20', 'single', 'solosingle', '1676900517256_000_33346NG-728x485.jpg', '1676900517256_kl.jpg', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -538,7 +684,7 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `faculty`
 --
 ALTER TABLE `faculty`
-  MODIFY `facultyID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `facultyID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `highlight`
@@ -550,7 +696,7 @@ ALTER TABLE `highlight`
 -- AUTO_INCREMENT for table `matchplay`
 --
 ALTER TABLE `matchplay`
-  MODIFY `matchID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=294;
+  MODIFY `matchID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=374;
 
 --
 -- AUTO_INCREMENT for table `place`
@@ -568,7 +714,7 @@ ALTER TABLE `place_opening`
 -- AUTO_INCREMENT for table `player`
 --
 ALTER TABLE `player`
-  MODIFY `playerID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
+  MODIFY `playerID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
 
 --
 -- AUTO_INCREMENT for table `sport`
@@ -586,13 +732,13 @@ ALTER TABLE `sport_type`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `teamID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `teamID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `tournament`
 --
 ALTER TABLE `tournament`
-  MODIFY `tnmID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `tnmID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `university`
