@@ -19,10 +19,9 @@ router.get('/', (req, res, next) => {
          if (err) console.log('error',err);
          dbConnection.query('SELECT * FROM tournament WHERE CURDATE() BETWEEN tnmStartdate AND tnmEnddate ORDER BY Rstartdate DESC LIMIT 4',(err,ongoing)=>{
             if (err) console.log('error',err);
-            dbConnection.query('SELECT * FROM tournament WHERE st1 IS NOT NULL ORDER BY tnmID DESC LIMIT 1',(err,ending)=>{
+            dbConnection.query('SELECT * FROM tournament WHERE st1 IS NOT NULL ORDER BY tnmID DESC LIMIT 4',(err,ending)=>{
                 if (err) console.log('error',err);
-                const data={opening:opening,ongoing:ongoing,ending:ending}
-                res.json({data});
+                res.render('userside/index', { opening,ongoing,ending,status_login: req.session.loggedin});
     })
 })
 })
