@@ -15,13 +15,16 @@ let transporter = nodemailer.createTransport({
 
 // display tnmcheck page
 router.get('/', function(req, res, next){
-    dbConnection.query('SELECT t.*,s.*,count(p.playerFName) AS nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.Rstartdate >= CURRENT_DATE() AND t.Renddate <= CURRENT_DATE() GROUP BY t.tnmID ORDER BY t.Rstartdate DESC LIMIT 4', (err, opening) => {
+    dbConnection.query(`SELECT t.tnmID,t.tnmName,t.tnmPicture,s.sportPlaynum,DATE_FORMAT(t.Rstartdate, '%d %M %Y') AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,DATE_FORMAT(t.tnmStartdate, '%d %M %Y') AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,count(p.playerFName) AS nop
+     FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.Rstartdate >= CURRENT_DATE() AND t.Renddate <= CURRENT_DATE() GROUP BY t.tnmID ORDER BY t.Rstartdate DESC LIMIT 4`, (err, opening) => {
          if (err) console.log('error',err);
-         dbConnection.query('SELECT t.*,s.*,count(p.playerFName) AS nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.tnmStartdate >= CURRENT_DATE() AND t.tnmEnddate <= CURRENT_DATE() OR t.st1 IS NULL GROUP BY t.tnmID ORDER BY t.tnmStartdate DESC LIMIT 4',(err,ongoing)=>{
+         dbConnection.query(`SELECT t.tnmID,t.tnmName,t.tnmPicture,s.sportPlaynum,DATE_FORMAT(t.Rstartdate, '%d %M %Y') AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,DATE_FORMAT(t.tnmStartdate, '%d %M %Y') AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,count(p.playerFName) AS nop 
+         FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.tnmStartdate >= CURRENT_DATE() AND t.tnmEnddate <= CURRENT_DATE() OR t.st1 IS NULL GROUP BY t.tnmID ORDER BY t.tnmStartdate DESC LIMIT 4`,(err,ongoing)=>{
             if (err) console.log('error',err);
-            dbConnection.query('SELECT t.*,s.*,count(p.playerFName) AS nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.st1 IS NOT NULL GROUP BY t.tnmID ORDER BY t.tnmStartdate DESC LIMIT 4',(err,ending)=>{
+            dbConnection.query(`SELECT t.tnmID,t.tnmName,t.tnmPicture,s.sportPlaynum,DATE_FORMAT(t.Rstartdate, '%d %M %Y') AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,DATE_FORMAT(t.tnmStartdate, '%d %M %Y') AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,count(p.playerFName) AS nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.st1 IS NOT NULL GROUP BY t.tnmID ORDER BY t.tnmStartdate DESC LIMIT 4`,(err,ending)=>{
                 if (err) console.log('error',err);
-                res.render('userside/index', { opening,ongoing,ending});
+                let Array = {opening,ongoing,ending};
+                res.send(Array);
     })
 })
 })
@@ -201,8 +204,8 @@ router.get('/showall', function(req, res, next) {
 
 router.get('/tnmdetail/(:tnmID)', function(req, res, next) {
     let tnmID = req.params.tnmID;
-    dbConnection.query('SELECT * FROM tournament LEFT JOIN sport ON tournament.sportID = sport.sportID WHERE tnmID = ' + tnmID, (err, rows) => {
-        res.render('userside/tnm/tnmdetail', { data: rows,tnmID: tnmID});
+    dbConnection.query(`SELECT t.tnmName,t.tnmTypegame,t.tnmPicture,DATE_FORMAT(t.tnmStartdate, '%d %M %Y') AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,t.tnmDetail,DATE_FORMAT(t.Rstartdate, '%d %M %Y') AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,t.tnmFile1 FROM tournament t LEFT JOIN sport ON t.sportID = sport.sportID WHERE t.tnmID =` + tnmID, (err, rows) => {
+        res.send(rows);
     })
 })
 
@@ -934,26 +937,28 @@ console.log(rows)
    })
 
    router.get('/opening', function(req,res,next){
-    dbConnection.query('SELECT t.*,s.*,count(p.playerFName) AS nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.Rstartdate >= CURRENT_DATE() AND t.Renddate <= CURRENT_DATE() GROUP BY t.tnmID ORDER BY t.Rstartdate DESC;',(error,results)=>{
+    dbConnection.query(`SELECT t.tnmID,t.tnmName,t.tnmPicture,s.sportPlaynum,DATE_FORMAT(t.Rstartdate, '%d %M %Y') AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,DATE_FORMAT(t.tnmStartdate, '%d %M %Y') AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,count(p.playerFName) AS nop
+    FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.Rstartdate >= CURRENT_DATE() AND t.Renddate <= CURRENT_DATE() GROUP BY t.tnmID ORDER BY t.Rstartdate DESC`,(error,results)=>{
        res.render('userside/status/opening',{data:results})
     })
    })
 
    router.get('/ongoing', function(req,res,next){
-    dbConnection.query('SELECT t.*,s.*,count(p.playerFName) AS nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.tnmStartdate >= CURRENT_DATE() AND t.tnmEnddate <= CURRENT_DATE() OR t.st1 IS NULL GROUP BY t.tnmID ORDER BY t.tnmStartdate DESC;',(error,results)=>{
-       res.render('userside/status/ongoing',{data:results})
+    dbConnection.query(`SELECT t.tnmID,t.tnmName,t.tnmPicture,s.sportPlaynum,DATE_FORMAT(t.Rstartdate, '%d %M %Y') AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,DATE_FORMAT(t.tnmStartdate, '%d %M %Y') AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,count(p.playerFName) AS nop 
+    FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.tnmStartdate >= CURRENT_DATE() AND t.tnmEnddate <= CURRENT_DATE() OR t.st1 IS NULL GROUP BY t.tnmID ORDER BY t.tnmStartdate DESC`,(error,results)=>{
+       res.send(results);
     })
-   })
+   })   
 
    router.get('/ending', function(req,res,next){
-    dbConnection.query('SELECT * FROM tournament WHERE st1 AND nd2 AND rd3 IS NOT NULL ORDER BY tnmStartdate DESC;',(error,results)=>{
-       res.render('userside/status/ending',{data:results})
+    dbConnection.query(`SELECT t.tnmID,t.tnmName,t.tnmPicture,s.sportPlaynum,DATE_FORMAT(t.Rstartdate, '%d %M %Y') AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,DATE_FORMAT(t.tnmStartdate, '%d %M %Y') AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,count(p.playerFName) AS nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.st1 IS NOT NULL GROUP BY t.tnmID ORDER BY t.tnmStartdate DESC`,(error,results)=>{
+        res.send(results);
     })
    })
 
    router.get('/search', function(req,res,next){
     dbConnection.query('SELECT t.*,s.*,count(p.playerFName) AS nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.st1 IS NOT NULL GROUP BY t.tnmID ORDER BY t.tnmStartdate DESC;',(error,results)=>{
-       res.render('userside/status/search',{data:results})
+        res.send(results);
     })
    })
 
