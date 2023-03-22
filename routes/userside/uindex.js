@@ -269,7 +269,8 @@ router.get('/tnmbracket/(:tnmID)', function(req, res, next) {
                         })
                 })
             }else{
-                res.render('Blank');
+                let array = {"rows":[{"tnmTypegame":"Blank"}]}
+                res.send(array);
             }
         }else {
             if(rows[0].tnmTypegame ==='leaderboard'){
@@ -331,7 +332,8 @@ router.get('/tnmbracket/(:tnmID)', function(req, res, next) {
 
             })
         }else{
-                res.render('Blank');
+            let array = {"rows":[{"tnmTypegame":"Blank"}]}
+                res.send(array);
             }
 
         }
@@ -403,11 +405,12 @@ router.get('/tnmmatch/(:tnmID)', function(req, res, next) {
                 })
             })
         }else{
-            res.send('Blank');
+            let array = {"rows":[{"tnmTypegame":"Blank"}]}
+                res.send(array);
             }
         }else{
             if(rows[0].tnmTypegame === 'leaderboard'){
-                dbConnection.query(`SELECT team.*,t.tnmID,m.score,m.pDate,TIME_FORMAT(m.time, '%H:%i') AS time,pl.placeName,pl.placeID FROM matchplay m LEFT JOIN team team ON team.teamID = m.teamID LEFT JOIN tournament t ON t.tnmID = m.tnmID LEFT JOIN place pl ON pl.placeID = m.placeID WHERE t.tnmID = ? ORDER BY score desc`,tnmID, (err, results) => {
+                dbConnection.query(`SELECT team.teamName AS playerFName,t.tnmID,m.score,DATE_FORMAT(m.pDate, '%d %M %Y') AS pDate,TIME_FORMAT(m.time, '%H:%i') AS time,pl.placeName,pl.placeID FROM matchplay m LEFT JOIN team team ON team.teamID = m.teamID LEFT JOIN tournament t ON t.tnmID = m.tnmID LEFT JOIN place pl ON pl.placeID = m.placeID WHERE t.tnmID = ? ORDER BY score desc`,tnmID, (err, results) => {
                     let array = {rows,results};
                         res.send(array);
                     })
@@ -439,7 +442,8 @@ router.get('/tnmmatch/(:tnmID)', function(req, res, next) {
                 })
             })
         }else{
-            res.send('Blank');
+            let array = {"rows":[{"tnmTypegame":"Blank"}]}
+                res.send(array);
             }
 
         }
@@ -447,22 +451,11 @@ router.get('/tnmmatch/(:tnmID)', function(req, res, next) {
     })
 })
 
-router.get('/tnmrank/(:tnmID)', function(req, res, next) {
-    let tnmID = req.params.tnmID;
-    dbConnection.query('SELECT * FROM tournament WHERE tnmID =' + tnmID, (err, rows) => {
-        if (err) {
-            req.flash('error', err);
-            res.render('userside/tnm/tnmrank', { data: '' });
-        } else {
-            res.render('userside/tnm/tnmrank', { data: rows,tnmID: tnmID});
-        }
-    })
-})
 
 router.get('/tnmhighlight/(:tnmID)', function(req, res, next) {
     let tnmID = req.params.tnmID;
-    dbConnection.query('SELECT * FROM highlight h LEFT JOIN tournament t ON t.tnmID = h.tnmID WHERE h.tnmID = ' + tnmID, (err, rows) => {
-            res.render('userside/tnm/tnmhighlight', { data: rows,tnmID: tnmID});
+    dbConnection.query(`SELECT h.linkvid,h.filePic,h.description,DATE_FORMAT(h.date, '%d %M %Y') AS date FROM highlight h LEFT JOIN tournament t ON t.tnmID = h.tnmID WHERE h.tnmID = ` + tnmID, (err, rows) => {
+            res.send({rows});
     })
 })
 
@@ -477,10 +470,12 @@ router.get('/tnmplace/(:placeID)',function(req, res, next){
 })
 
 router.get('/singlereg/(:tnmID)', function(req, res, next) {
-    let tnmID = req.params.tnmID;
-    dbConnection.query('SELECT u.name, u.uniID,t.tnmID, t.tnmName,t.tnmUrl FROM university u INNER JOIN tournament t WHERE tnmID =' +tnmID, (err, rows) => {
-                res.render('userside/regform/singlereg', { data: rows,tnmID: tnmID });
+    dbConnection.query('SELECT name, uniID FROM university', (err, rows) => {
+        dbConnection.query('SELECT name,facultyID,uniID FROM faculty', (err, results) => {
+        let array = {rows,results};
+        res.send(array);
     })
+})
 })
 
 router.post('/singlereg', function(req, res, next) {
