@@ -15,19 +15,77 @@ let transporter = nodemailer.createTransport({
 
 // display tnmcheck page
 router.get('/', function(req, res, next){
-    dbConnection.query(`SELECT t.tnmID,t.tnmName,t.tnmPicture,s.sportPlaynum,DATE_FORMAT(t.Rstartdate, '%d %M %Y') AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,DATE_FORMAT(t.tnmStartdate, '%d %M %Y') AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,count(p.playerFName) AS nop
-     FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.Rstartdate >= CURRENT_DATE() AND t.Renddate <= CURRENT_DATE() GROUP BY t.tnmID ORDER BY t.Rstartdate DESC LIMIT 4`, (err, opening) => {
+    dbConnection.query(`SELECT t.tnmID,t.tnmName,t.tnmPicture,DATE_FORMAT(t.Rstartdate, '%d %M %Y') as Rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') as Renddate,s.sportPlaynum,COUNT(p.playerID) as nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON p.tnmID = t.tnmID WHERE CURRENT_DATE() BETWEEN t.Rstartdate AND t.Renddate GROUP BY t.tnmID ORDER BY t.Rstartdate DESC LIMIT 4`, (err, opening) => {
          if (err) console.log('error',err);
-         dbConnection.query(`SELECT t.tnmID,t.tnmName,t.tnmPicture,s.sportPlaynum,DATE_FORMAT(t.Rstartdate, '%d %M %Y') AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,DATE_FORMAT(t.tnmStartdate, '%d %M %Y') AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,count(p.playerFName) AS nop 
-         FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.tnmStartdate >= CURRENT_DATE() AND t.tnmEnddate <= CURRENT_DATE() OR t.st1 IS NULL GROUP BY t.tnmID ORDER BY t.tnmStartdate DESC LIMIT 4`,(err,ongoing)=>{
+         dbConnection.query(`SELECT DATE_FORMAT(t.tnmStartdate, '%d %M %Y' ) AS tnmStartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y' ) AS tnmEnddate,t.tnmID,t.tnmName,t.tnmPicture,s.sportPlaynum, COUNT(p.playerFName) as nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON p.tnmID = t.tnmID WHERE CURRENT_DATE() BETWEEN t.tnmStartdate AND t.tnmEnddate GROUP BY t.tnmID ORDER BY t.tnmStartdate DESC LIMIT 4`,(err,ongoing)=>{
             if (err) console.log('error',err);
-            dbConnection.query(`SELECT t.tnmID,t.tnmName,t.tnmPicture,s.sportPlaynum,DATE_FORMAT(t.Rstartdate, '%d %M %Y') AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,DATE_FORMAT(t.tnmStartdate, '%d %M %Y') AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,count(p.playerFName) AS nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.st1 IS NOT NULL GROUP BY t.tnmID ORDER BY t.tnmStartdate DESC LIMIT 4`,(err,ending)=>{
+            dbConnection.query(`SELECT DATE_FORMAT(t.tnmStartdate, '%d %M %Y' ) AS tnmStartdate, DATE_FORMAT(t.tnmEnddate, '%d %M %Y' ) AS tnmEnddate,t.tnmName,t.tnmID,t.tnmPicture,s.sportPlaynum, COUNT(p.playerFName) as nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON p.tnmID = t.tnmID WHERE t.st1 IS NOT NULL GROUP BY t.tnmID ORDER BY t.tnmEnddate DESC LIMIT 4`,(err,ending)=>{
                 if (err) console.log('error',err);
                 let Array = {opening,ongoing,ending};
                 res.send(Array);
     })
 })
 })
+})
+
+router.post('/otpagain', function(req, res, next){
+    console.log(req.body);
+    let tnmID = req.body.tnmID;
+    let OTP = req.body.OTP;
+    let Email = req.body.Email;
+    
+    dbConnection.query('SELECT * FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID WHERE t.tnmID = ?',[tnmID],(err,result)=>{
+        console.log(result);
+        if(result.sportPlaynum > 1){
+            console.log('solo');
+            let mailOptions = {
+                from: 'thesissportmanagement@gmail.com',
+                to: Email,
+                subject: 'รหัส OTP สำหรับการยืนยันอีเมลสมัครเข้าร่วมการแข่งขัน',
+                text: '',
+                html:`<h1>ยืนยันการลงทะเบียนการแข่งขัน `+result[0].tnmName+`</h1>
+                        <h2>รหัส OTP ของคุณคือ : ` + OTP + `</h2>`
+              };
+        
+              transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log('Email sent: ' + info.response);
+                  res.send('success');
+                }
+              });
+            
+
+        }else{
+            
+            console.log('team');
+
+            let mailOptions = {
+                from: 'thesissportmanagement@gmail.com',
+                to: Email,
+                subject: 'รหัส OTP สำหรับการยืนยันอีเมลสมัครเข้าร่วมการแข่งขัน',
+                text: '',
+                html:`<h1>ยืนยันการลงทะเบียนการแข่งขัน `+result[0].tnmName+`</h1>
+                    <h2>รหัส OTP ของคุณคือ : ` + OTP + `</h2>`
+            };
+            
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                  console.log(error);
+                } else {
+                    
+                  console.log('Email sent: ' + info.response);
+                  res.send('success');
+                  
+                }
+              });
+
+
+        }
+
+    })
+
 })
 
 router.post('/verifysingle', function(req, res, next) {
@@ -62,15 +120,13 @@ router.post('/verifysingle', function(req, res, next) {
                     playerFile1: playerFile1,
                     detailDoc: 'สมัครซ้ำ'
                 }
-                console.log('ซ้ำ')
                 dbConnection.query('INSERT INTO player SET ?', form_data, (err, result) => {
                     if (err) {
                         console.log(JSON.stringify(err));
-                        req.flash('error', err)
-                        res.redirect('/tnmdetail/'+tnmID)
+                        // req.flash('error', err)
+                        // res.redirect('/tnmdetail/'+tnmID)
                     } else {
-                        req.flash('success', 'สมัครเข้าร่วมการแข่งขันแล้ว');
-                        res.redirect('/tnmdetail/'+tnmID);
+                        res.send('ซ้ำ');
                     }
                 })
             }else{
@@ -86,43 +142,28 @@ router.post('/verifysingle', function(req, res, next) {
                     playerIDCard: playerIDCard,
                     playerFile1: playerFile1
                 }
-                console.log('ไม่ซ้ำ')
                 dbConnection.query('INSERT INTO player SET ?', form_data, (err, result) => {
                     if (err) {
                         console.log(JSON.stringify(err));
-                        req.flash('error', err)
-                        res.redirect('/tnmdetail/'+tnmID)
+                        // req.flash('error', err)
+                        // res.redirect('/tnmdetail/'+tnmID)
                     } else {
-                        req.flash('success', 'สมัครเข้าร่วมการแข่งขันแล้ว');
-                        res.redirect('/tnmdetail/'+tnmID);
+                        // req.flash('success', 'สมัครเข้าร่วมการแข่งขันแล้ว');
+                        // res.redirect('/tnmdetail/'+tnmID);
+                        res.send('ไม่ซ้ำ');
                     }
                 })
             }
         })
 
     } else {
-        req.flash('error','รหัส OTP ไม่ถูกต้อง');
-        res.render('userside/regform/otpsingle',{
-            submitOTP:submitOTP,
-            OTP:OTP,
-            playerEmail: playerEmail,
-            tnmID: tnmID,
-            playerFName: playerFName,
-            playerLName: playerLName,
-            playerGender: playerGender,
-            playerBirthday: playerBirthday,
-            playerPhone: playerPhone,
-            playerEmail: playerEmail,
-            facultyID: facultyID,
-            playerIDCard: playerIDCard,
-            playerFile1: playerFile1
-        })
+        res.send();
         
     }
 });
 
 router.post('/verifyteam', function(req, res, next) {
-    let otp = req.body.otp;
+    let OTP = req.body.OTP;
     let teamOTP = req.body.teamOTP;
     let teamName = req.body.teamName;
     let NameAgent = req.body.NameAgent;
@@ -141,7 +182,7 @@ router.post('/verifyteam', function(req, res, next) {
     let playerEmail = req.body.playerEmail;
     let facultyID = req.body.facultyID;
     let playerIDCard = req.body.playerIDCard;
-    let player_photo = req.body.player_photo;
+    let player_photo = req.body.playerFile;
     let detailDoc = req.body.detailDoc;
 
     let values = [];
@@ -151,7 +192,7 @@ router.post('/verifyteam', function(req, res, next) {
     }
 
 
-    if(otp === teamOTP){
+    if(OTP === teamOTP){
 
     let sql_team = "INSERT INTO team (teamName, NameAgent, LnameAgent, uniID, teamPhoneA, teamEmailA, teamPic, tnmID) VALUES ?";
     let sql_player = "INSERT INTO player (playerFName, playerLName, playerGender, playerBirthday, playerPhone, playerEmail, facultyID, playerIDCard, playerFile1, detailDoc, tnmID,teamID) VALUES ?";
@@ -165,27 +206,13 @@ router.post('/verifyteam', function(req, res, next) {
                 values[i].push(teamID)
         }
         dbConnection.query(sql_player, [values], function (err, result) {
-            if (err) throw err;
-            console.log("Number of persons inserted: " + result.affectedRows);
-            req.flash('success', 'สมัครเข้าร่วมการแข่งขันแล้ว');
-            res.redirect('/tnmdetail/'+tnmID);
+            res.send('success');
                 
         })
         
     })
 }else{
-    req.flash('error','รหัส OTP ไม่ถูกต้อง');
-    res.render('userside/regform/otpteam',{
-        teamOTP: teamOTP,
-        tnmID: tnmID,
-        teamName: teamName,
-        NameAgent: NameAgent,
-        LnameAgent: LnameAgent,
-        teamPhoneA: teamPhoneA,
-        uniID: uniID,
-        teamEmailA: teamEmailA,
-        teamfile: teamfile,
-        values: values})
+    res.send('failded');
 }
 
 })
@@ -204,7 +231,7 @@ router.get('/showall', function(req, res, next) {
 
 router.get('/tnmdetail/(:tnmID)', function(req, res, next) {
     let tnmID = req.params.tnmID;
-    dbConnection.query(`SELECT t.tnmID,sport.sportPlaynum,t.tnmName,t.tnmTypegame,t.tnmPicture,DATE_FORMAT(t.tnmStartdate, '%d %M') AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,t.tnmDetail,DATE_FORMAT(t.Rstartdate, '%d %M') AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,t.tnmFile1 FROM tournament t LEFT JOIN sport ON t.sportID = sport.sportID WHERE t.tnmID =` + tnmID, (err, rows) => {
+    dbConnection.query(`SELECT t.tnmID,sport.sportPlaynum,t.tnmName,t.tnmTypegame,t.tnmPicture,DATE_FORMAT(t.tnmStartdate, '%d %M %Y' ) AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,t.tnmDetail,DATE_FORMAT(t.Rstartdate, '%d %M %Y' ) AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,t.tnmFile1 FROM tournament t LEFT JOIN sport ON t.sportID = sport.sportID WHERE t.tnmID =` + tnmID, (err, rows) => {
         let array = {rows};
         res.send(array);
     })
@@ -470,10 +497,14 @@ router.get('/tnmplace/(:placeID)',function(req, res, next){
 })
 
 router.get('/singlereg/(:tnmID)', function(req, res, next) {
-    dbConnection.query('SELECT name, uniID FROM university', (err, rows) => {
+    const tnmID = req.params.tnmID;
+    dbConnection.query('SELECT initials, uniID FROM university', (err, rows) => {
         dbConnection.query('SELECT name,facultyID,uniID FROM faculty', (err, results) => {
-        let array = {rows,results};
+            dbConnection.query('SELECT tnmName,tnmUrl FROM tournament WHERE tnmID = ?',(tnmID),(err,data)=>{
+
+        let array = {rows,results,data};
         res.send(array);
+    })
     })
 })
 })
@@ -489,16 +520,20 @@ router.post('/singlereg', function(req, res, next) {
     let facultyID = req.body.facultyID;
     let playerIDCard = req.body.playerIDCard;
     let tnmID =req.body.tnmID;
-
+    console.log(req.body);
+    console.log(req.files);
     let playerFiles = [];
+    let playerFile1 = '';
+
     for(let i =1;i <= 3; i++){
         if(req.files[`playerFile${i}`]){
         let playerFile = req.files[`playerFile${i}`];
         console.log(playerFile)
         let  name_pfile = new Date().getTime() +'_'+playerFile.name;
-        playerFile.mv('./assets/player/' + name_pfile);
+        playerFile.mv('./Sport-management-of-RMUTT-Games/assets/player/' + name_pfile);
         playerFiles.push(name_pfile);
     }
+    playerFile1 = playerFiles.join(',');
     }
 
     let OTP = Math.floor(1000 + Math.random() * 9000);
@@ -518,32 +553,36 @@ router.post('/singlereg', function(req, res, next) {
           console.log(error);
         } else {
           console.log('Email sent: ' + info.response);
-          res.render('userside/regform/otpsingle',{
-            playerEmail: playerEmail,
-            OTP: OTP,
-            tnmID: tnmID,
-            playerFName: playerFName,
-            playerLName: playerLName,
-            playerGender: playerGender,
-            playerBirthday: playerBirthday,
-            playerPhone: playerPhone,
-            playerEmail: playerEmail,
-            facultyID: facultyID,
-            playerIDCard: playerIDCard,
-            playerFile1: playerFiles.join(',')})
+          let array = {playerFName,playerLName,playerGender,playerBirthday,playerEmail,playerPhone,facultyID,playerIDCard,tnmID,playerFile1,OTP};
+          res.send(array);
         }
       });
     })
 })
 
 router.get('/teamreg/(:tnmID)', function(req, res, next) {
-    let tnmID = req.params.tnmID;
-    dbConnection.query('SELECT u.name, u.uniID,t.tnmID,t.tnmUrl, t.tnmName,s.sportName,s.sportPlaynum FROM tournament t INNER JOIN university u LEFT JOIN sport s ON t.sportID = s.sportID WHERE tnmID = ' +tnmID, (err, rows) => {
-                res.render('userside/regform/teamreg', { data: rows,});
+    const tnmID = req.params.tnmID;
+    dbConnection.query('SELECT initials, uniID FROM university', (err, rows) => {
+        dbConnection.query('SELECT name,facultyID,uniID FROM faculty', (err, results) => {
+            dbConnection.query('SELECT t.tnmName,t.tnmUrl,s.sportPlaynum FROM tournament t LEFT JOIN sport s on s.sportID = t.sportID WHERE t.tnmID = ?',(tnmID),(err,data)=>{
+
+        let array = {rows,results,data};
+        res.send(array);
     })
+    })
+})
+})
+
+router.post('/testpost',async function(req,res,next){
+
+    
+
 })
 
 router.post('/teamreg', async function(req, res, next){
+
+    
+    console.log(req.body);
     //ทีม
     let teamName = req.body.teamName;
     let NameAgent = req.body.NameAgent;
@@ -551,20 +590,23 @@ router.post('/teamreg', async function(req, res, next){
     let teamPhoneA = req.body.teamPhoneA;
     let teamEmailA = req.body.teamEmailA;
     let teamPic = req.files.teamPic;
-    let uniID = req.body.university[0];
-    let tnmID = req.body.tnmID[0];
+    let uniID = req.body.uniID;
+    let tnmID = req.body.tnmID;
+
     var teamfile = new Date().getTime() +'_'+teamPic.name;
-    teamPic.mv('./assets/team/' + teamfile);
+    teamPic.mv('./Sport-management-of-RMUTT-Games/assets/team/' + teamfile);
 
     //ผู้เล่น
-    let playerFName = req.body.playerFName;
-    let playerLName = req.body.playerLName;
-    let playerGender = req.body.playerGender;
-    let playerBirthday = req.body.playerBirthday;
-    let playerPhone = req.body.playerPhone;
-    let playerEmail = req.body.playerEmail;
-    let facultyID = req.body.facultyID;
-    let playerIDCard = req.body.playerIDCard;
+    let playerFName = req.body.playerFName.split(',');
+    let playerLName = req.body.playerLName.split(',');
+    let playerGender = req.body.playerGender.split(',');
+    let playerBirthday = req.body.playerBirthday.split(',');
+    let playerPhone = req.body.playerPhone.split(',');
+    let playerEmail = req.body.playerEmail.split(',');
+    let facultyID = req.body.facultyID.split(',');
+    let playerIDCard = req.body.playerIDCard.split(',');
+
+    console.log(req.files.teamPic);
     
     let values = [];
 
@@ -573,16 +615,29 @@ router.post('/teamreg', async function(req, res, next){
     for (let i = 0; i < playerFName.length; i++) {
         
         let playerFiles = [];
-        for (let j = 1; j <= 3; j++) {
-            if(req.files[`playerFile${j}`] && Array.isArray(req.files[`playerFile${j}`])){
-                let playerFile = req.files[`playerFile${j}`][i];
+
+        if(req.files[`playerFile${i+1}`].length == undefined){
+        let playerFile = req.files[`playerFile${i+1}`];
+        let  name_pfile = new Date().getTime() +'_'+playerFile.name;
+        playerFile.mv('./Sport-management-of-RMUTT-Games/assets/player/' + name_pfile);
+        playerFiles.push(name_pfile);
+        playerFileName = playerFiles.join(',');
+        }else{
+
+            for (let j = 0; j < 3; j++) {
+            if(req.files[`playerFile${i+1}`][j]){
+                console.log('พบไฟล์',j,i);
+                let playerFile = req.files[`playerFile${i+1}`][j];
                 console.log(playerFile)
                 let  name_pfile = new Date().getTime() +'_'+playerFile.name;
-                playerFile.mv('./assets/player/' + name_pfile);
+                playerFile.mv('./Sport-management-of-RMUTT-Games/assets/player/' + name_pfile);
                 playerFiles.push(name_pfile);
             }
             playerFileName = playerFiles.join(',');
           }
+
+        }
+        
 
         console.log('join',playerFileName);
         
@@ -593,7 +648,7 @@ router.post('/teamreg', async function(req, res, next){
             values.push([playerFName[i], playerLName[i], playerGender[i], playerBirthday[i], playerPhone[i],playerEmail[i], facultyID[i], playerIDCard[i],playerFileName, detailDoc, tnmID]);
             resolve(rows);
         }else{
-            let detailDoc = null;
+            let detailDoc = '';
             values.push([playerFName[i], playerLName[i], playerGender[i], playerBirthday[i], playerPhone[i],playerEmail[i], facultyID[i], playerIDCard[i],playerFileName, detailDoc, tnmID]);
             resolve(rows);
         }
@@ -602,7 +657,7 @@ router.post('/teamreg', async function(req, res, next){
 
 }
 
-console.log(values)
+
 
         let teamOTP = Math.floor(1000 + Math.random() * 9000);
 
@@ -616,38 +671,21 @@ console.log(values)
             html:`<h1>ยืนยันการลงทะเบียนการแข่งขัน `+tnm[0].tnmName+`</h1>
                 <h2>รหัส OTP ของคุณคือ : ` + teamOTP + `</h2>`
         };
-
+        
         transporter.sendMail(mailOptions, function(error, info){
             if (error) {
               console.log(error);
             } else {
+                
               console.log('Email sent: ' + info.response);
-              res.render('userside/regform/otpteam',{
-                teamOTP: teamOTP,
-                tnmID: tnmID,
-                values: values,
-                uniID: uniID,
-                teamName: teamName,
-                NameAgent: NameAgent,
-                LnameAgent: LnameAgent,
-                teamPhoneA: teamPhoneA,
-                teamEmailA: teamEmailA,
-                teamfile: teamfile
-                })
+              let array = {teamName,NameAgent,LnameAgent,teamPhoneA,teamEmailA,uniID,teamfile,tnmID,teamOTP,values};
+              res.send(array);
+              
             }
           });
         })
 })
 
-
-router.post("/fetch_faculty", function(req, res, next) {
-    var uniID = req.body.uniID;
-    var fac_query = "SELECT * FROM faculty WHERE uniID = ?";
-    dbConnection.query(fac_query, [uniID], function(err, results) {
-        if (err) throw err;
-        res.send(results);
-    });
-});
 
 router.get('/result', async function(req,res,next){
     dbConnection.query('SELECT * FROM university', async (error,results)=>{
@@ -680,7 +718,7 @@ router.get('/result', async function(req,res,next){
         resolve(tnmcount);
             })
           })
-        uniName.push(results[i].name);
+        uniName.push(results[i].initials);
         team.push(rows);
         solo.push(single);
         counttnm.push(tnmcount);
@@ -877,21 +915,19 @@ console.log(rows)
    })
 
    router.get('/opening', function(req,res,next){
-    dbConnection.query(`SELECT t.tnmID,t.tnmName,t.tnmPicture,s.sportPlaynum,DATE_FORMAT(t.Rstartdate, '%d %M %Y') AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,DATE_FORMAT(t.tnmStartdate, '%d %M %Y') AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,count(p.playerFName) AS nop
-    FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.Rstartdate >= CURRENT_DATE() AND t.Renddate <= CURRENT_DATE() GROUP BY t.tnmID ORDER BY t.Rstartdate DESC`,(error,results)=>{
+    dbConnection.query(`SELECT t.tnmID,t.tnmName,t.tnmPicture,DATE_FORMAT(t.Rstartdate, '%d %M %Y') as Rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') as Renddate,s.sportPlaynum,COUNT(p.playerID) as nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON p.tnmID = t.tnmID WHERE CURRENT_DATE() BETWEEN t.Rstartdate AND t.Renddate GROUP BY t.tnmID ORDER BY t.Rstartdate DESC`,(error,results)=>{
         res.send(results);
     })
    })
 
    router.get('/ongoing', function(req,res,next){
-    dbConnection.query(`SELECT t.tnmID,t.tnmName,t.tnmPicture,s.sportPlaynum,DATE_FORMAT(t.Rstartdate, '%d %M %Y') AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,DATE_FORMAT(t.tnmStartdate, '%d %M %Y') AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,count(p.playerFName) AS nop 
-    FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.tnmStartdate >= CURRENT_DATE() AND t.tnmEnddate <= CURRENT_DATE() OR t.st1 IS NULL GROUP BY t.tnmID ORDER BY t.tnmStartdate DESC`,(error,results)=>{
+    dbConnection.query(`SELECT DATE_FORMAT(t.tnmStartdate, '%d %M %Y' ) AS tnmStartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y' ) AS tnmEnddate,t.tnmID,t.tnmName,t.tnmPicture,s.sportPlaynum, COUNT(p.playerFName) as nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON p.tnmID = t.tnmID WHERE CURRENT_DATE() BETWEEN t.tnmStartdate AND t.tnmEnddate GROUP BY t.tnmID ORDER BY t.tnmStartdate DESC`,(error,results)=>{
        res.send(results);
     })
    })   
 
    router.get('/ending', function(req,res,next){
-    dbConnection.query(`SELECT t.tnmID,t.tnmName,t.tnmPicture,s.sportPlaynum,DATE_FORMAT(t.Rstartdate, '%d %M %Y') AS rstartdate,DATE_FORMAT(t.Renddate, '%d %M %Y') AS renddate,DATE_FORMAT(t.tnmStartdate, '%d %M %Y') AS tnmstartdate,DATE_FORMAT(t.tnmEnddate, '%d %M %Y') AS tnmenddate,count(p.playerFName) AS nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON t.tnmID = p.tnmID WHERE t.st1 IS NOT NULL GROUP BY t.tnmID ORDER BY t.tnmStartdate DESC`,(error,results)=>{
+    dbConnection.query(`SELECT DATE_FORMAT(t.tnmStartdate, '%d %M %Y' ) AS tnmStartdate, DATE_FORMAT(t.tnmEnddate, '%d %M %Y' ) AS tnmEnddate,t.tnmName,t.tnmID,t.tnmPicture,s.sportPlaynum, COUNT(p.playerFName) as nop FROM tournament t LEFT JOIN sport s ON s.sportID = t.sportID LEFT JOIN player p ON p.tnmID = t.tnmID WHERE t.st1 IS NOT NULL GROUP BY t.tnmID ORDER BY t.tnmEnddate DESC`,(error,results)=>{
         res.send(results);
     })
    })

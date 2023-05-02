@@ -9,7 +9,7 @@ const fs = require('fs');
 
 //routes variable
 const uindex = require('./routes/userside/uindex');
-app.use("/assets",express.static('assets'));
+app.use("/assets",express.static('Sport-management-of-RMUTT-Games/assets'));
 
 app.use(fileUpload());
 app.use(bodyParser.json({ extended: true }))
