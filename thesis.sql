@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2023 at 04:49 AM
+-- Generation Time: May 05, 2023 at 03:09 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -238,25 +238,34 @@ INSERT INTO `matchplay` (`matchID`, `participant1`, `participant2`, `playerID`, 
 (862, 102, 104, NULL, NULL, 1, 3, NULL, 78, NULL, NULL, '2023-04-07', '13:01:00', '14:01:00', 34, NULL),
 (863, 102, 105, NULL, NULL, 2, 4, NULL, 78, NULL, NULL, '2023-04-07', '13:02:00', '14:02:00', 35, NULL),
 (864, 102, 106, NULL, NULL, 2, 1, NULL, 78, NULL, NULL, '2023-04-07', '13:02:00', '14:02:00', 36, NULL),
-(865, 103, 104, NULL, NULL, 1, 3, NULL, 78, NULL, NULL, '2023-04-07', '14:02:00', '15:02:00', 33, NULL),
+(865, 103, 104, NULL, NULL, 3, 1, NULL, 78, NULL, NULL, '2023-04-07', '14:02:00', '15:02:00', 33, NULL),
 (866, 103, 105, NULL, NULL, 3, 2, NULL, 78, NULL, NULL, '2023-04-07', '14:03:00', '15:03:00', 34, NULL),
 (867, 103, 106, NULL, NULL, 2, 4, NULL, 78, NULL, NULL, '2023-04-07', '14:03:00', '15:03:00', 35, NULL),
 (868, 104, 105, NULL, NULL, 4, 1, NULL, 78, NULL, NULL, '2023-04-07', '14:03:00', '15:03:00', 36, NULL),
 (869, 104, 106, NULL, NULL, 2, 3, NULL, 78, NULL, NULL, '2023-04-07', '15:03:00', '16:03:00', 33, NULL),
-(870, 105, 106, NULL, NULL, 4, 1, NULL, 78, NULL, NULL, '2023-04-07', '15:03:00', '16:03:00', 34, NULL),
-(871, 104, 102, NULL, NULL, 4, 1, NULL, 78, '1', 1, '2023-04-07', '15:04:00', '16:04:00', 35, NULL),
-(872, 105, 106, NULL, NULL, 4, 1, NULL, 78, '1', 2, '2023-04-07', '15:05:00', '16:05:00', 36, NULL),
-(873, 104, 105, NULL, NULL, 1, 3, NULL, 78, '2', 3, '2023-04-07', '16:05:00', '17:05:00', 33, NULL),
-(874, NULL, NULL, 406, NULL, NULL, NULL, NULL, 80, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(875, NULL, NULL, 417, NULL, NULL, NULL, NULL, 80, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(876, NULL, NULL, 418, NULL, NULL, NULL, NULL, 80, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(877, NULL, NULL, 419, NULL, NULL, NULL, NULL, 80, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(878, NULL, NULL, 420, NULL, NULL, NULL, NULL, 80, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(879, NULL, NULL, 421, NULL, NULL, NULL, NULL, 80, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(880, 422, 423, NULL, NULL, NULL, NULL, NULL, 77, '1', 1, '2023-04-14', '13:33:00', '14:33:00', 33, NULL),
-(881, 424, 425, NULL, NULL, NULL, NULL, NULL, 77, '1', 2, NULL, NULL, NULL, NULL, NULL),
-(882, 426, NULL, NULL, NULL, NULL, NULL, NULL, 77, '2', 3, NULL, NULL, NULL, NULL, NULL),
-(883, 427, NULL, NULL, NULL, NULL, NULL, NULL, 77, '2', 4, NULL, NULL, NULL, NULL, NULL);
+(870, 105, 106, NULL, NULL, 3, 2, NULL, 78, NULL, NULL, '2023-04-07', '15:03:00', '16:03:00', 34, NULL),
+(874, NULL, NULL, 406, NULL, NULL, NULL, 3, 80, NULL, NULL, '2023-05-04', '13:26:00', '14:26:00', 38, NULL),
+(875, NULL, NULL, 417, NULL, NULL, NULL, 2, 80, NULL, NULL, '2023-05-04', '13:26:00', '14:26:00', 38, NULL),
+(876, NULL, NULL, 418, NULL, NULL, NULL, 1, 80, NULL, NULL, '2023-05-04', '13:26:00', '14:26:00', 38, NULL),
+(877, NULL, NULL, 419, NULL, NULL, NULL, 4, 80, NULL, NULL, '2023-05-04', '13:26:00', '14:26:00', 38, NULL),
+(878, NULL, NULL, 420, NULL, NULL, NULL, 5, 80, NULL, NULL, '2023-05-04', '13:26:00', '14:26:00', 38, NULL),
+(879, NULL, NULL, 421, NULL, NULL, NULL, 6, 80, NULL, NULL, '2023-05-04', '13:26:00', '14:26:00', 38, NULL),
+(884, 422, 423, NULL, NULL, 3, 1, NULL, 77, '1', 1, '2023-04-10', '10:01:00', '11:01:00', 33, NULL),
+(885, 424, 425, NULL, NULL, NULL, NULL, NULL, 77, '1', 2, NULL, NULL, NULL, NULL, NULL),
+(886, 426, NULL, NULL, NULL, NULL, NULL, NULL, 77, '2', 3, NULL, NULL, NULL, NULL, NULL),
+(887, 427, 422, NULL, NULL, NULL, NULL, NULL, 77, '2', 4, NULL, NULL, NULL, NULL, NULL),
+(935, 457, 458, NULL, NULL, NULL, NULL, NULL, 79, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(936, 457, 459, NULL, NULL, NULL, NULL, NULL, 79, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(937, 457, 460, NULL, NULL, NULL, NULL, NULL, 79, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(938, 457, 461, NULL, NULL, NULL, NULL, NULL, 79, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(939, 458, 459, NULL, NULL, NULL, NULL, NULL, 79, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(940, 458, 460, NULL, NULL, NULL, NULL, NULL, 79, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(941, 458, 461, NULL, NULL, NULL, NULL, NULL, 79, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(942, 459, 460, NULL, NULL, NULL, NULL, NULL, 79, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(943, 459, 461, NULL, NULL, NULL, NULL, NULL, 79, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(944, 460, 461, NULL, NULL, NULL, NULL, NULL, 79, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(945, 102, 103, NULL, NULL, NULL, NULL, NULL, 78, '1', 1, NULL, NULL, NULL, NULL, NULL),
+(946, 106, 104, NULL, NULL, NULL, NULL, NULL, 78, '1', 2, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -434,7 +443,12 @@ INSERT INTO `player` (`playerID`, `playerIDCard`, `playerFName`, `playerLName`, 
 (426, '1798965160546', 'ชลธี', 'ฤกษ์ฤทธิชัย', 'ชาย', '2023-03-29', '0984956546', 'firstlnw0099@gmail.com', 1, NULL, '1681018507913_kl.jpg', 77, NULL, 'accept', '2023-04-09'),
 (427, '1798965160546', 'จักริน', 'ฤกษ์ฤทธิชัย', 'ชาย', '2023-03-29', '0984956546', 'firstlnw0099@gmail.com', 1, NULL, '1681018507913_kl.jpg', 77, NULL, 'accept', '2023-04-09'),
 (450, '3024168797987', 'ffeqfewf', 'wefwefwf', 'ชาย', '2023-04-19', '0987979797', 'firstlnw0099@gmail.com', 1, NULL, '1681912616649__117310488_16.jpg', 77, NULL, 'wait', '2023-04-19'),
-(453, '0987978907979', 'tean1', 'tean', 'ชาย', '2023-04-23', '0897907979', 'firstlnw0099@gmail.com', 6, NULL, '1682262616291_5616.jpg', 77, NULL, 'wait', '2023-04-23');
+(453, '0987978907979', 'tean1', 'tean', 'ชาย', '2023-04-23', '0897907979', 'firstlnw0099@gmail.com', 6, NULL, '1682262616291_5616.jpg', 77, NULL, 'wait', '2023-04-23'),
+(457, '2302406596797', 'นนทพัทธ์', 'ฤกษ์ฤทธิชัย', 'ชาย', '2023-04-05', '0984956546', 'firstlnw0099@gmail.com', 2, NULL, '1681018581301_batmintan.jpg', 79, '', 'accept', '2023-04-09'),
+(458, '1206546079797', 'ชลธี', 'คำลือ', 'ชาย', '2023-03-28', '0984984162', 'firstlnw0099@gmail.com', 2, NULL, '1681018581305_batmintan.jpg', 79, '', 'accept', '2023-04-09'),
+(459, '2302406596797', 'จักริน', 'ฤกษ์ฤทธิชัย', 'ชาย', '2023-04-05', '0984956546', 'firstlnw0099@gmail.com', 2, NULL, '1681018581301_batmintan.jpg', 79, '', 'accept', '2023-04-09'),
+(460, '1206546079797', 'กิตติภพ', 'คำลือ', 'ชาย', '2023-03-28', '0984984162', 'firstlnw0099@gmail.com', 2, NULL, '1681018581305_batmintan.jpg', 79, '', 'accept', '2023-04-09'),
+(461, '2302406596797', 'เมธานันท์', 'ฤกษ์ฤทธิชัย', 'ชาย', '2023-04-05', '0984956546', 'firstlnw0099@gmail.com', 2, NULL, '1681018581301_batmintan.jpg', 79, '', 'accept', '2023-04-09');
 
 -- --------------------------------------------------------
 
@@ -547,9 +561,10 @@ CREATE TABLE `tournament` (
 INSERT INTO `tournament` (`tnmID`, `tnmName`, `sportID`, `tnmUrl`, `Rstartdate`, `Renddate`, `tnmStartdate`, `tnmEnddate`, `tnmTypegame`, `tnmDetail`, `tnmPicture`, `tnmFile1`, `accountID`, `st1`, `nd2`, `rd3`) VALUES
 (77, 'แบตมินตันเดี่ยว single', 1, 'บัตรประชาชน', '2023-04-08', '2023-04-11', '2023-04-12', '2023-04-15', 'single', 'แบตมินตันเดี่ยว single', '1681018234645_batmintan.jpg', '1681018234647_batmintan.jpg', NULL, NULL, NULL, NULL),
 (78, 'แบตมินตันคู่ round single', 2, 'บัตรประชาชน', '2023-04-08', '2023-04-10', '2023-04-11', '2023-04-13', 'roundsingle', 'แบตมินตันเดี่ยว single', '1681018284145_batmintan.jpg', '1681018284146_batmintan.jpg', NULL, '105', '106', '104'),
-(79, 'เปตอง roundrobin', 5, 'บัตรประชาชน และ บัตรประจำตัวนักศึกษา', '2023-04-07', '2023-04-10', '2023-04-11', '2023-04-13', NULL, 'เปตอง roundrobin', '1681018323612_kl.jpg', '1681018323612_kl.jpg', NULL, NULL, NULL, NULL),
-(80, 'เปตอง leaderboard', 5, 'บัตรประชาชน', '2023-04-07', '2023-04-10', '2023-04-11', '2023-04-13', 'leaderboard', 'เปตอง leaderboard', '1681018351703_kl.jpg', '1681018351703_kl.jpg', NULL, NULL, NULL, NULL),
-(81, 'ทดสอบการสมัคร', 1, 'บัตรประชาชน', '2023-04-22', '2023-04-30', '2023-04-26', '2023-04-25', NULL, 'ทดสอบการสมัคร', '1682269355730_kl.jpg', '1682269355732_kl.jpg', NULL, NULL, NULL, NULL);
+(79, 'เปตอง roundrobin', 5, 'บัตรประชาชน และ บัตรประจำตัวนักศึกษา', '2023-04-07', '2023-04-10', '2023-04-11', '2023-04-13', 'roundrobin', 'เปตอง roundrobin', '1681018323612_kl.jpg', '1681018323612_kl.jpg', NULL, NULL, NULL, NULL),
+(80, 'เปตอง leaderboard', 5, 'บัตรประชาชน', '2023-04-07', '2023-04-10', '2023-04-11', '2023-04-13', 'leaderboard', 'เปตอง leaderboard', '1681018351703_kl.jpg', '1681018351703_kl.jpg', NULL, '421', '420', '419'),
+(81, 'ทดสอบการสมัคร เดี่ยว', 1, 'บัตรประชาชน', '2023-04-22', '2023-05-31', '2023-04-26', '2023-04-25', NULL, 'ทดสอบการสมัคร', '1682269355730_kl.jpg', '1682269355732_kl.jpg,1rerer_kl.jpg', NULL, NULL, NULL, NULL),
+(82, 'ทดสอบการสมัคร ทีม', 2, 'บัตรประชาชน', '2023-04-22', '2023-05-31', '2023-04-26', '2023-04-25', NULL, 'ทดสอบการสมัคร', '1682269355730_kl.jpg', '1682269355732_kl.jpg', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -561,7 +576,7 @@ CREATE TABLE `university` (
   `uniID` int(3) NOT NULL,
   `name` varchar(255) NOT NULL,
   `status` enum('ไม่เข้าร่วม','เข้าร่วม') NOT NULL DEFAULT 'ไม่เข้าร่วม' COMMENT 'ระดับสิทธิ์ 0 = ไม่ได้เข้าร่วม,1 = เข้าร่วม',
-  `initials` varchar(10) DEFAULT NULL
+  `initials` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -569,16 +584,15 @@ CREATE TABLE `university` (
 --
 
 INSERT INTO `university` (`uniID`, `name`, `status`, `initials`) VALUES
-(1, 'มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี', 'เข้าร่วม', 'RMUTT'),
-(2, 'มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา', 'เข้าร่วม', 'RMUTL'),
-(3, 'มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน', 'เข้าร่วม', 'RMUTI'),
-(4, 'มหาวิทยาลัยเทคโนโลยีราชมงคลกรุงเทพ', 'เข้าร่วม', 'RMUTK'),
-(5, 'มหาวิทยาลัยเทคโนโลยีราชมงคลตะวันออก', 'เข้าร่วม', 'RMUTTO'),
-(6, 'มหาวิทยาลัยเทคโนโลยีราชมงคลพระนคร', 'เข้าร่วม', 'RMUTP'),
-(7, 'มหาวิทยาลัยเทคโนโลยีราชมงคลรัตนโกสินทร์', 'เข้าร่วม', 'RMUTR'),
-(8, 'มหาวิทยาลัยเทคโนโลยีราชมงคลศรีวิชัย', 'เข้าร่วม', 'RMUTSV'),
-(9, 'มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ', 'เข้าร่วม', 'RMUTSB'),
-(10, ' ม.ธัญ', 'เข้าร่วม', NULL);
+(1, 'มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี', 'เข้าร่วม', 'มทร.ธัญบุรี'),
+(2, 'มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา', 'เข้าร่วม', 'มทร.ล้านนา'),
+(3, 'มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน', 'เข้าร่วม', 'มทร.อีสาน'),
+(4, 'มหาวิทยาลัยเทคโนโลยีราชมงคลกรุงเทพ', 'เข้าร่วม', 'มทร.กรุงเทพ'),
+(5, 'มหาวิทยาลัยเทคโนโลยีราชมงคลตะวันออก', 'เข้าร่วม', 'มทร.ตะวันออก'),
+(6, 'มหาวิทยาลัยเทคโนโลยีราชมงคลพระนคร', 'เข้าร่วม', 'มทร.พระนคร'),
+(7, 'มหาวิทยาลัยเทคโนโลยีราชมงคลรัตนโกสินทร์', 'เข้าร่วม', 'มทร.รัตนโกสินทร์'),
+(8, 'มหาวิทยาลัยเทคโนโลยีราชมงคลศรีวิชัย', 'เข้าร่วม', 'มทร.ศรีวิชัย'),
+(9, 'มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ', 'เข้าร่วม', 'มทร.สุวรรณภูมิ');
 
 --
 -- Indexes for dumped tables
@@ -696,7 +710,7 @@ ALTER TABLE `highlight`
 -- AUTO_INCREMENT for table `matchplay`
 --
 ALTER TABLE `matchplay`
-  MODIFY `matchID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=884;
+  MODIFY `matchID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=949;
 
 --
 -- AUTO_INCREMENT for table `place`
@@ -714,7 +728,7 @@ ALTER TABLE `place_opening`
 -- AUTO_INCREMENT for table `player`
 --
 ALTER TABLE `player`
-  MODIFY `playerID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=457;
+  MODIFY `playerID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=462;
 
 --
 -- AUTO_INCREMENT for table `sport`
@@ -738,7 +752,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `tournament`
 --
 ALTER TABLE `tournament`
-  MODIFY `tnmID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `tnmID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `university`
